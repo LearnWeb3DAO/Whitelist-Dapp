@@ -281,7 +281,7 @@ npm i ethers
   export default function Home() {
     // walletConnected keep track of whether the user's wallet is connected or not
     const [walletConnected, setWalletConnected] = useState(false);
-    // joinedWhitelist keeps track of whether the current metamask address has joined the waitlist or not
+    // joinedWhitelist keeps track of whether the current metamask address has joined the Whitelist or not
     const [joinedWhitelist, setJoinedWhitelist] = useState(false);
     // loading is set to true when we are waiting for a transaction to get mined
     const [loading, setLoading] = useState(false);
@@ -424,7 +424,7 @@ npm i ethers
         if (joinedWhitelist) {
           return (
             <div className={styles.description}>
-              Thanks for joining the Waitlist!
+              Thanks for joining the Whitelist!
             </div>
           );
         } else if (loading) {
@@ -476,7 +476,7 @@ npm i ethers
               Its an NFT collection for developers in Crypto.
             </div>
             <div className={styles.description}>
-              {numberOfWhitelisted} have already joined the Waitlist
+              {numberOfWhitelisted} have already joined the Whitelist
             </div>
             {renderButton()}
           </div>
