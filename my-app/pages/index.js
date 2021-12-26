@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { WHITELIST_CONTRACT_ADDRESS, abi } from "../contants";
 
 export default function Home() {
-  let web3Modal;
   // walletConnected keep track of whether the user's wallet is connected or not
   const [walletConnected, setWalletConnected] = useState(false);
   // joinedWhitelist keeps track of whether the current metamask address has joined the waitlist or not
@@ -15,6 +14,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   // numberOfWhitelisted tracks the number of addresses's whitelisted
   const [numberOfWhitelisted, setNumberOfWhitelisted] = useState(0);
+  const [web3Modal, setWeb3Modal] = useState(null);
 
   /*
     addAddressToWhitelist:  Adds the current connected address to the whitelist
@@ -156,14 +156,21 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if (web3Modal) {
+      connectWallet();
+    }
+  }, [web3Modal]);
+
+  useEffect(() => {
     // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
     if (!walletConnected) {
-      web3Modal = new Web3Modal({
-        network: "rinkeby",
-        providerOptions: {},
-        disableInjectedProvider: false,
-      });
-      connectWallet();
+      setWeb3Modal(
+        new Web3Modal({
+          network: "rinkeby",
+          providerOptions: {},
+          disableInjectedProvider: false,
+        })
+      );
     }
   }, [walletConnected]);
 
@@ -196,6 +203,3 @@ export default function Home() {
     </div>
   );
 }
-
-// TODO: CHANGE THE README and ADD COMMENTS
-// TODO: VERCEL
