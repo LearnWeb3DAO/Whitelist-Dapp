@@ -43,92 +43,79 @@ Hardhat is an Ethereum development environment and framework designed for full s
 
 - Start by creating a new file inside the `contracts` directory called `Whitelist.sol`.
 
-  ```go
-  //SPDX-License-Identifier: Unlicense
-  pragma solidity ^0.8.0;
+```go
+//SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.0;
 
+contract Whitelist {
 
-  contract Whitelist {
+    // Max number of whitelisted addresses allowed
+    uint8 public maxWhitelistedAddresses;
 
-      // Max number of whitelisted addresses allowed
-      uint8 public maxWhitelistedAddresses;
+    // Create a mapping of whitelistedAddresses
+    // if an address is whitelisted, we would set it to true, it is false my default for all other addresses.
+    mapping(address => bool) public whitelistedAddresses;
 
-      // Create a mapping of whitelistedAddresses
-      // if an address is whitelisted, we would set it to true, it is false my default for all other addresses.
-      mapping(address => bool) public whitelistedAddresses;
+    // numAddressesWhitelisted would be used to keep track of how many addresses have been whitelisted
+    uint8 private numAddressesWhitelisted;
 
-      // numAddressesWhitelisted would be used to keep track of how many addresses have been whitelisted
-      uint8 private numAddressesWhitelisted;
+    constructor(uint8 _maxWhitelistedAddresses) {
+        maxWhitelistedAddresses =  _maxWhitelistedAddresses;
+    }
 
-      constructor(uint8 _maxWhitelistedAddresses) {
-          maxWhitelistedAddresses =  _maxWhitelistedAddresses;
-      }
+    /**
+        addAddressToWhitelist - This function adds the address of the sender to the
+        whitelist
+     */
+    function addAddressToWhitelist() public {
+        // check if the numAddressesWhitelisted < maxWhitelistedAddresses, if not then throw an error.
+        require(numAddressesWhitelisted < maxWhitelistedAddresses, "More addresses cant be added, limit reached");
+        // Add the address which called the function to the whitelistedAddress array
+        whitelistedAddresses[msg.sender] = true;
+        // Increase the number of whitelisted addresses
+        numAddressesWhitelisted += 1;
+    }
 
-      /**
-          addAddressToWhitelist - This function adds the address of the sender to the
-          whitelist
-      */
-      function addAddressToWhitelist() public {
-          // check if the numAddressesWhitelisted < maxWhitelistedAddresses, if not then throw an error.
-          require(numAddressesWhitelisted < maxWhitelistedAddresses, "More addresses cant be added, limit reached");
-          // Add the address which called the function to the whitelistedAddress array
-          whitelistedAddresses[msg.sender] = true;
-          // Increase the number of whitelisted addresses
-          numAddressesWhitelisted += 1;
-      }
+    /**
+        removeAddressFromWhitelist - This function removes an address from the whitelist if the address was in the list.
+    */
 
-      /**
-          removeAddressFromWhitelist - This function removes an address from the whitelist if the address was in the list.
-      */
+    function removeAddressFromWhitelist() public {
+        // Check if the whitelist is empty, if true then throw an error
+        require(numAddressesWhitelisted > 0, "Whitelist is empty, address cant be removed");
+        // Check if the address sending the transaction is in the whitelist, if not then throw an error
+        require(whitelistedAddresses[msg.sender], "Sender is not in the whitelist");
+        whitelistedAddresses[msg.sender] = false;
+        numAddressesWhitelisted -= 1;
+    }
 
-      function removeAddressFromWhitelist() public {
-          // Check if the whitelist is empty, if true then throw an error
-          require(numAddressesWhitelisted > 0, "Whitelist is empty, address cant be removed");
-          // Check if the address sending the transaction is in the whitelist, if not then throw an error
-          require(whitelistedAddresses[msg.sender], "Sender is not in the whitelist");
-          whitelistedAddresses[msg.sender] = false;
-          numAddressesWhitelisted -= 1;
-      }
+    /**
+        getAddressFromWhitelist checks if the address passed is in the Whitelist or not
+     */
+    function getAddressFromWhitelist(address checkAddress) public view returns (bool) {
+        // this returns true if the address is in the whitelist else false
+        return  whitelistedAddresses[checkAddress];
+    }
 
-  }
+}
 
-  ```
+```
 
 - Compile the contract, open up a terminal and execute these commands
 
-  ```bash
-     npx hardhat compile
-  ```
+```bash
+   npx hardhat compile
+```
 
 - Lets deploy the contract to `rinkeby` network. First, create a new file named `deploy.js` under `scripts` folder
 
 - Now we would write some code to deploy the contract in `deploy.js` file.
 
   ````js
-
-          // Import ethers from Hardhat package
-          const { ethers } = require("hardhat");
-
-          async function main() {
-          //
-          //A Signer in ethers.js is an object that represents an Ethereum account. It is
-          //used to send transactions to contracts and other accounts. Here we are getting a list //of accounts
-          //in the node we're connected to and only keeping the first one.
-
-          const [deployer] = await ethers.getSigners();
-
-          console.log("Deploying contracts with the account", deployer.address);
-
-          // here we are trying to get the balance of the address who would deploy the contract
-          const accountBalance = await deployer.getBalance();
-          const accountBalanceString = accountBalance.toString();
-
-          console.log("Account balance:", accountBalanceString);
-
-          /_
+          /*
           A ContractFactory in ethers.js is an abstraction used to deploy new smart contracts,
           so whitelistContract here is a factory for instances of our Whitelist contract.
-          _/
+          */
           const whitelistContract = await ethers.getContractFactory("Whitelist");
 
           // here we deploy the contract
@@ -155,7 +142,7 @@ Hardhat is an Ethereum development environment and framework designed for full s
 ```
 
 // Go to https://www.alchemyapi.io, sign up, create
-// a new App in its dashboard and select the network as Rinkeby, and replace "KEY" with its key
+// a new App in its dashboard and select the network as Rinkeby, and replace "add-the-alchemy-key-url-here" with its key url
 ALCHEMY_API_KEY_URL="add-the-alchemy-key-url-here"
 
 // Replace this private key with your RINKEBY account private key
@@ -174,14 +161,10 @@ RINKEBY_PRIVATE_KEY="add-the-rinkeby-private-key-here"
 - Now open the hardhat.config.js file, we would add the `rinkeby` network here so that we can deploy our contract to rinkeby. Replace all the lines in the `hardhar.config.js` file with the given below lines
 
 ```js
-// Go to https://www.alchemyapi.io, sign up, create
-// a new App in its dashboard, and replace "KEY" with its key
-const ALCHEMY_API_KEY_URL = process.env.ALCHEMY_API_KEY_URL;
+require("@nomiclabs/hardhat-waffle");
+require("dotenv").config({ path: ".env" });
 
-// Replace this private key with your Rinkeby account private key
-// To export your private key from Metamask, open Metamask and
-// go to Account Details > Export Private Key
-// Be aware of NEVER putting real Ether into testing accounts
+const ALCHEMY_API_KEY_URL = process.env.ALCHEMY_API_KEY_URL;
 
 const RINKEBY_PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY;
 
@@ -190,7 +173,7 @@ module.exports = {
   networks: {
     rinkeby: {
       url: ALCHEMY_API_KEY_URL,
-      accounts: [`${RINKEBY_PRIVATE_KEY}`],
+      accounts: [RINKEBY_PRIVATE_KEY],
     },
   },
 };
@@ -217,7 +200,7 @@ module.exports = {
 To create this `next-app`, in the terminal point to Whitelist-Dapp folder and type
 
 ```bash
-    npx create-next-app@latest --typescript
+    npx create-next-app@latest
 ```
 
 and press `enter` for all teh questions
@@ -230,3 +213,16 @@ and press `enter` for all teh questions
   ```
 
 - Now go to `http://localhost:3000`, your app should be running 🤘
+
+- Now lets install Web3Modal library(https://github.com/Web3Modal/web3modal). Web3Modal is an easy-to-use library to help developers add support for multiple providers in their apps with a simple customizable configuration. By default Web3Modal Library supports injected providers like (Metamask, Dapper, Gnosis Safe, Frame, Web3 Browsers, etc) and WalletConnect, You can also easily configure the library to support Portis, Fortmatic, Squarelink, Torus, Authereum, D'CENT Wallet and Arkane.
+  To install in your terminal which points to my-app execute:
+
+```bash
+  npm install --save web3modal
+```
+
+- In the same terminal also install `ethers.js`
+
+```bash
+npm i ethers
+```

@@ -12,7 +12,7 @@ contract Whitelist {
     mapping(address => bool) public whitelistedAddresses;
 
     // numAddressesWhitelisted would be used to keep track of how many addresses have been whitelisted
-    uint8 private numAddressesWhitelisted;
+    uint8 public numAddressesWhitelisted;
 
     constructor(uint8 _maxWhitelistedAddresses) {
         maxWhitelistedAddresses =  _maxWhitelistedAddresses;
@@ -29,19 +29,6 @@ contract Whitelist {
         whitelistedAddresses[msg.sender] = true;
         // Increase the number of whitelisted addresses
         numAddressesWhitelisted += 1;
-    }
-
-    /**
-        removeAddressFromWhitelist - This function removes an address from the whitelist if the address was in the list.
-    */
-
-    function removeAddressFromWhitelist() public {
-        // Check if the whitelist is empty, if true then throw an error
-        require(numAddressesWhitelisted > 0, "Whitelist is empty, address cant be removed");
-        // Check if the address sending the transaction is in the whitelist, if not then throw an error
-        require(whitelistedAddresses[msg.sender], "Sender is not in the whitelist");
-        whitelistedAddresses[msg.sender] = false;
-        numAddressesWhitelisted -= 1;
     }
 
 }
