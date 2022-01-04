@@ -508,10 +508,13 @@ npm run dev
 ```
 
 Your whitelist dapp should now work without errors 🚀
+
 ---
 ### Push to github
 Make sure before proceeding you have pushed all your code to github :)
+
 ---
+
 
 ## Deploying your dApp
 
