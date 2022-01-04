@@ -525,6 +525,7 @@ We will now deploy your dApp, so that everyone can see your website and you can 
 - ![](https://i.imgur.com/ZRjfkCE.png)
 - When configuring your new project, Vercel will allow you to customize your `Root Directory`
 - Click `Edit` next to `Root Directory` and set it to `my-app`
+- Select the Framework as `Next.js`
 - Click `Deploy`
 - Now you can see your deployed website by going to your dashboard, selecting your project, and copying the URL from there!
 
