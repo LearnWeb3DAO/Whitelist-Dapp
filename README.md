@@ -4,7 +4,7 @@ You are launching your NFT collection named `Crypto Devs`. You want to give your
 
 ## Requirements
 
-- Whitelist access would be given to the first `10` users who want to get in.
+- Whitelist access should be given to the first `10` users for free who want to get in.
 - There should be a website where people can go and enter into the whitelist.
 
 Lets start building 🚀
@@ -15,7 +15,7 @@ Lets start building 🚀
 
 - You can write code in JavaScript (Beginner Track - [Level-0](https://github.com/LearnWeb3DAO/Basic-Programming))
 - Have set up a Metamask Wallet (Beginner Track - [Level-4](https://github.com/LearnWeb3DAO/Crypto-Wallets))
-- Your computer has Node Js installed. If not download from [here](https://nodejs.org/en/download/)
+- Your computer has Node.js installed. If not download from [here](https://nodejs.org/en/download/)
 
 ---
 
@@ -23,7 +23,7 @@ Lets start building 🚀
 
 ### Smart Contract
 
-To build the smart contract we would be using [Hardhat](https://hardhat.org/).
+To build the smart contract we will be using [Hardhat](https://hardhat.org/).
 Hardhat is an Ethereum development environment and framework designed for full stack development in Solidity. In simple words you can write your smart contract, deploy them, run tests, and debug your code.
 
 - To setup a Hardhat project, Open up a terminal and execute these commands
@@ -46,7 +46,7 @@ Hardhat is an Ethereum development environment and framework designed for full s
 - Start by creating a new file inside the `contracts` directory called `Whitelist.sol`.
 
   ```go
-      //SPDX-License-Identifier: Unlicense
+  //SPDX-License-Identifier: Unlicense
   pragma solidity ^0.8.0;
 
 
@@ -71,6 +71,8 @@ Hardhat is an Ethereum development environment and framework designed for full s
           whitelist
        */
       function addAddressToWhitelist() public {
+          // check if the user has already been whitelisted
+          require(!whitelistedAddresses[msg.sender], "Sender has already been whitelisted");
           // check if the numAddressesWhitelisted < maxWhitelistedAddresses, if not then throw an error.
           require(numAddressesWhitelisted < maxWhitelistedAddresses, "More addresses cant be added, limit reached");
           // Add the address which called the function to the whitelistedAddress array
@@ -90,20 +92,22 @@ Hardhat is an Ethereum development environment and framework designed for full s
 
 - Lets deploy the contract to `rinkeby` network.Create a new file named `deploy.js` under the `scripts` folder
 
-- Now we would write some code to deploy the contract in `deploy.js` file.
+- Now we will write some code to deploy the contract in `deploy.js` file.
 
   ```js
   const { ethers } = require("hardhat");
 
   async function main() {
     /*
-            A ContractFactory in ethers.js is an abstraction used to deploy new smart contracts,
-            so whitelistContract here is a factory for instances of our Whitelist contract.
-        */
+    A ContractFactory in ethers.js is an abstraction used to deploy new smart contracts,
+    so whitelistContract here is a factory for instances of our Whitelist contract.
+    */
     const whitelistContract = await ethers.getContractFactory("Whitelist");
 
     // here we deploy the contract
     const deployedWhitelistContract = await whitelistContract.deploy(10);
+    // Wait for it to finish deploying
+    await deployedWhitelistContract.deployed();
 
     // print the address of the deployed contract
     console.log(
@@ -123,66 +127,66 @@ Hardhat is an Ethereum development environment and framework designed for full s
 
 - Now create a `.env` file in the `hardhat-tutorial` folder and add the following lines, use the instructions in the comments to get your Alchemy API Key URL and RINKEBY Private Key. Make sure that the account from which you get your rinkeby private key is funded with Rinkeby Ether.
 
-```
+  ```
 
-// Go to https://www.alchemyapi.io, sign up, create
-// a new App in its dashboard and select the network as Rinkeby, and replace "add-the-alchemy-key-url-here" with its key url
-ALCHEMY_API_KEY_URL="add-the-alchemy-key-url-here"
+  // Go to https://www.alchemyapi.io, sign up, create
+  // a new App in its dashboard and select the network as Rinkeby, and replace "add-the-alchemy-key-url-here" with its key url
+  ALCHEMY_API_KEY_URL="add-the-alchemy-key-url-here"
 
-// Replace this private key with your RINKEBY account private key
-// To export your private key from Metamask, open Metamask and
-// go to Account Details > Export Private Key
-// Be aware of NEVER putting real Ether into testing accounts
-RINKEBY_PRIVATE_KEY="add-the-rinkeby-private-key-here"
+  // Replace this private key with your RINKEBY account private key
+  // To export your private key from Metamask, open Metamask and
+  // go to Account Details > Export Private Key
+  // Be aware of NEVER putting real Ether into testing accounts
+  RINKEBY_PRIVATE_KEY="add-the-rinkeby-private-key-here"
 
-```
+  ```
 
-- Now we would install `dotenv` package to be able to import the env file and use it in our config. Open up a terminal pointing at`hardhat-tutorial` directory and execute this command
+- Now we will install `dotenv` package to be able to import the env file and use it in our config. Open up a terminal pointing at`hardhat-tutorial` directory and execute this command
   ```bash
   npm install dotenv
   ```
 - Now open the hardhat.config.js file, we would add the `rinkeby` network here so that we can deploy our contract to rinkeby. Replace all the lines in the `hardhar.config.js` file with the given below lines
 
-```js
-require("@nomiclabs/hardhat-waffle");
-require("dotenv").config({ path: ".env" });
+  ```js
+  require("@nomiclabs/hardhat-waffle");
+  require("dotenv").config({ path: ".env" });
 
-const ALCHEMY_API_KEY_URL = process.env.ALCHEMY_API_KEY_URL;
+  const ALCHEMY_API_KEY_URL = process.env.ALCHEMY_API_KEY_URL;
 
-const RINKEBY_PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY;
+  const RINKEBY_PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY;
 
-module.exports = {
-  solidity: "0.8.4",
-  networks: {
-    rinkeby: {
-      url: ALCHEMY_API_KEY_URL,
-      accounts: [RINKEBY_PRIVATE_KEY],
+  module.exports = {
+    solidity: "0.8.4",
+    networks: {
+      rinkeby: {
+        url: ALCHEMY_API_KEY_URL,
+        accounts: [RINKEBY_PRIVATE_KEY],
+      },
     },
-  },
-};
-```
+  };
+  ```
 
 - To deploy, open up a terminal pointing at`hardhat-tutorial` directory and execute this command
   ```bash
-      npx hardhat run scripts/deploy.js --network rinkeby
+  npx hardhat run scripts/deploy.js --network rinkeby
   ```
 - Save the Whitelist Contract Address that was printed on your terminal in your notepad, you would need it futher down in the tutorial.
 
 ### Website
 
-- To develop the website we would be using [React](https://reactjs.org/) and [Next Js](https://nextjs.org/). React is a javascript framework which is used to make websites and Next Js is built on top of React.
-- First, You would need to create a new `next` app. Your folder structure should look something like
+- To develop the website we will use [React](https://reactjs.org/) and [Next Js](https://nextjs.org/). React is a javascript framework used to make websites and Next.js is a React framework that also allows writing backend APIs code along with the frontend, so you don't need two separate frontend and backend services.
+- First, You will need to create a new `next` app. Your folder structure should look something like
 
   ```
-     - Whitelist-Dapp
-         - hardhat-tutorial
-         - next-app
+  - Whitelist-Dapp
+      - hardhat-tutorial
+      - my-app
   ```
 
 - To create this `next-app`, in the terminal point to Whitelist-Dapp folder and type
 
   ```bash
-      npx create-next-app@latest
+  npx create-next-app@latest
   ```
 
   and press `enter` for all the questions
@@ -196,20 +200,20 @@ module.exports = {
 
 - Now go to `http://localhost:3000`, your app should be running 🤘
 
-- Now lets install Web3Modal library(https://github.com/Web3Modal/web3modal). Web3Modal is an easy-to-use library to help developers add support for multiple providers in their apps with a simple customizable configuration. By default Web3Modal Library supports injected providers like (Metamask, Dapper, Gnosis Safe, Frame, Web3 Browsers, etc) and WalletConnect, You can also easily configure the library to support Portis, Fortmatic, Squarelink, Torus, Authereum, D'CENT Wallet and Arkane.
+- Now lets install [Web3Modal library](https://github.com/Web3Modal/web3modal). Web3Modal is an easy to use library to help developers easily allow their users to connect to your dApps with all sorts of different wallets. By default Web3Modal Library supports injected providers like (Metamask, Dapper, Gnosis Safe, Frame, Web3 Browsers, etc) and WalletConnect, You can also easily configure the library to support Portis, Fortmatic, Squarelink, Torus, Authereum, D'CENT Wallet and Arkane.
   Open up a terminal pointing at`my-app` directory and execute this command
 
-```bash
-  npm install --save web3modal
-```
+  ```bash
+  npm install web3modal
+  ```
 
 - In the same terminal also install `ethers.js`
 
-```bash
-npm i ethers
-```
+  ```bash
+  npm install ethers
+  ```
 
-- In your public folder, download this file [SVG](https://github.com/LearnWeb3DAO/Whitelist-Dapp/blob/main/my-app/public/crypto-devs.svg) and rename it to `crypto-devs.svg`
+- In your my-app/public folder, download [this image](https://github.com/LearnWeb3DAO/Whitelist-Dapp/blob/main/my-app/public/crypto-devs.svg) and rename it to `crypto-devs.svg`
 - Now go to styles folder and replace all the contents of `Home.modules.css` file with the following code, this would add some styling to your dapp:
 
   ```css
@@ -268,7 +272,7 @@ npm i ethers
   }
   ```
 
-- Open you index.js file under the pages folder and paste the following code, explanation of the code can be found in the comments.
+- Open you index.js file under the pages folder and paste the following code, explanation of the code can be found in the comments. Make sure you read about React and [React Hooks](https://reactjs.org/docs/hooks-overview.html) if you are not familiar with them.
 
   ```js
   import Head from "next/head";
@@ -494,20 +498,28 @@ npm i ethers
   ```
 
 - Now create a new folder under the my-app folder and name it `constants`.
-- In the constants folder create a file, `index.js` and paste the following code. Replace `"addres of your whitelist contract"` with the address of the whitelist contract that you deployed. Replace `---your abi---` with the abi of your Whitelist Contract. To get the abi for your contract, go to your `hardhat-tutorial/artifacts/contracts/Whitelist.sol` folder and from your `Whitelist.json` file get the array marked under the `"abi"` key.
+- In the constants folder create a file, `index.js` and paste the following code.
+- Replace `"YOUR_WHITELIST_CONTRACT_ADDRESS"` with the address of the whitelist contract that you deployed.
+- Replace `"YOUR_ABI"` with the ABI of your Whitelist Contract. To get the ABI for your contract, go to your `hardhat-tutorial/artifacts/contracts/Whitelist.sol` folder and from your `Whitelist.json` file get the array marked under the `"abi"` key (it will be. a huge array, close to 100 lines if not more).
 
-```js
-export const abi =---your abi---
-export const WHITELIST_CONTRACT_ADDRESS = "addres of your whitelist contract"
-```
+  ```js
+  export const abi = YOUR_ABI;
+  export const WHITELIST_CONTRACT_ADDRESS = "YOUR_WHITELIST_CONTRACT_ADDRESS";
+  ```
 
 - Now in your terminal which is pointing to `my-app` folder, execute
 
-```bash
-npm run dev
-```
+  ```bash
+  npm run dev
+  ```
 
 Your whitelist dapp should now work without errors 🚀
+
+---
+
+### Push to github
+
+Make sure before proceeding you have [pushed all your code to github](https://medium.com/hackernoon/a-gentle-introduction-to-git-and-github-the-eli5-way-43f0aa64f2e4) :)
 
 ---
 
@@ -520,6 +532,7 @@ We will now deploy your dApp, so that everyone can see your website and you can 
 - ![](https://i.imgur.com/ZRjfkCE.png)
 - When configuring your new project, Vercel will allow you to customize your `Root Directory`
 - Click `Edit` next to `Root Directory` and set it to `my-app`
+- Select the Framework as `Next.js`
 - Click `Deploy`
 - Now you can see your deployed website by going to your dashboard, selecting your project, and copying the URL from there!
 

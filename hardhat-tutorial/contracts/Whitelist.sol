@@ -19,10 +19,12 @@ contract Whitelist {
     }
 
     /**
-        addAddressToWhitelist - This function adds the address of the sender to the 
+        addAddressToWhitelist - This function adds the address of the sender to the
         whitelist
      */
     function addAddressToWhitelist() public {
+        // check if the user has already been whitelisted
+        require(!whitelistedAddresses[msg.sender], "Sender has already been whitelisted");
         // check if the numAddressesWhitelisted < maxWhitelistedAddresses, if not then throw an error.
         require(numAddressesWhitelisted < maxWhitelistedAddresses, "More addresses cant be added, limit reached");
         // Add the address which called the function to the whitelistedAddress array
