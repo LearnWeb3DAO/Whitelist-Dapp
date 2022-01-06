@@ -515,13 +515,6 @@ Hardhat is an Ethereum development environment and framework designed for full s
 
 Your whitelist dapp should now work without errors 🚀
 
----
-### Push to github
-Make sure before proceeding you have pushed all your code to github :)
-
----
-
-
 ### Push to github
 
 Make sure before proceeding you have [pushed all your code to github](https://medium.com/hackernoon/a-gentle-introduction-to-git-and-github-the-eli5-way-43f0aa64f2e4) :)
