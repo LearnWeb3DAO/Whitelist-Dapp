@@ -2,6 +2,8 @@
 
 You are launching your NFT collection named `Crypto Devs`. You want to give your early supporters access to a whitelist for your collection, so here you are creating an whitelist dapp for `Crypto Devs`
 
+![](https://i.imgur.com/zgY0TGo.png)
+
 ## Requirements
 
 - Whitelist access should be given to the first `10` users for free who want to get in.
@@ -35,13 +37,24 @@ Hardhat is an Ethereum development environment and framework designed for full s
   npm install --save-dev hardhat
   ```
 
-  In the same directory where you installed Hardhat run:
+- In the same directory where you installed Hardhat run:
 
   ```bash
   npx hardhat
   ```
 
-  and press `enter` for all the questions.
+  - Select `Create a basic sample project`
+  - Press enter for the already specified `Hardhat Project root`
+  - Press enter for the question on if you want to add a `.gitignore`
+  - Press enter for `Do you want to install this sample project's dependencies with npm (@nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers)?`
+
+Now you have a hardhat project ready to go!
+
+If you are not on mac, please do this extra step and install these libraries as well :)
+
+```bash
+npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers
+```
 
 - Start by creating a new file inside the `contracts` directory called `Whitelist.sol`.
 
@@ -86,9 +99,9 @@ Hardhat is an Ethereum development environment and framework designed for full s
 
 - Compile the contract, open up a terminal pointing at`hardhat-tutorial` directory and execute this command
 
-```bash
-   npx hardhat compile
-```
+  ```bash
+     npx hardhat compile
+  ```
 
 - Lets deploy the contract to `rinkeby` network.Create a new file named `deploy.js` under the `scripts` folder
 
