@@ -285,7 +285,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
   }
   ```
 
-- Open you index.js file under the pages folder and paste the following code, explanation of the code can be found in the comments. Make sure you read about React and [React Hooks](https://reactjs.org/docs/hooks-overview.html) if you are not familiar with them.
+- Open your index.js file under the pages folder and paste the following code, explanation of the code can be found in the comments. Make sure you read about React and [React Hooks](https://reactjs.org/docs/hooks-overview.html) if you are not familiar with them.
 
   ```js
   import Head from "next/head";
@@ -538,7 +538,7 @@ Make sure before proceeding you have [pushed all your code to github](https://me
 
 We will now deploy your dApp, so that everyone can see your website and you can share it with all of your LearnWeb3 DAO friends.
 
-- Go to https://vercel.com/ and sign in with your GitHub
+- Go to [Vercel](https://vercel.com/) and sign in with your GitHub
 - Then click on `New Project` button and then select your Whitelist dApp repo
 - ![](https://i.imgur.com/ZRjfkCE.png)
 - When configuring your new project, Vercel will allow you to customize your `Root Directory`
