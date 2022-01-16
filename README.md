@@ -293,7 +293,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
   import Web3Modal from "web3modal";
   import { providers, Contract } from "ethers";
   import { useEffect, useRef, useState } from "react";
-  import { WHITELIST_CONTRACT_ADDRESS, abi } from "../constants";
+  import { WHITELIST_CONTRACT_ADDRESS, abi } from "../contants";
 
   export default function Home() {
     // walletConnected keep track of whether the user's wallet is connected or not
