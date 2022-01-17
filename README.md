@@ -69,7 +69,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
       uint8 public maxWhitelistedAddresses;
 
       // Create a mapping of whitelistedAddresses
-      // if an address is whitelisted, we would set it to true, it is false my default for all other addresses.
+      // if an address is whitelisted, we would set it to true, it is false by default for all other addresses.
       mapping(address => bool) public whitelistedAddresses;
 
       // numAddressesWhitelisted would be used to keep track of how many addresses have been whitelisted
