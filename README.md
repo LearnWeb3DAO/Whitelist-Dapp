@@ -97,12 +97,6 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
   }
   ```
 
-- Compile the contract, open up a terminal pointing at`hardhat-tutorial` directory and execute this command
-
-  ```bash
-     npx hardhat compile
-  ```
-
 - Lets deploy the contract to `rinkeby` network.Create a new file named `deploy.js` under the `scripts` folder
 
 - Now we will write some code to deploy the contract in `deploy.js` file.
@@ -179,6 +173,12 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
   };
   ```
 
+- Compile the contract, open up a terminal pointing at`hardhat-tutorial` directory and execute this command
+
+  ```bash
+     npx hardhat compile
+  ```
+  
 - To deploy, open up a terminal pointing at`hardhat-tutorial` directory and execute this command
   ```bash
   npx hardhat run scripts/deploy.js --network rinkeby
