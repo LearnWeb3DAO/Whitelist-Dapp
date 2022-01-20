@@ -69,12 +69,14 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
       uint8 public maxWhitelistedAddresses;
 
       // Create a mapping of whitelistedAddresses
-      // if an address is whitelisted, we would set it to true, it is false my default for all other addresses.
+      // if an address is whitelisted, we would set it to true, it is false by default for all other addresses.
       mapping(address => bool) public whitelistedAddresses;
 
       // numAddressesWhitelisted would be used to keep track of how many addresses have been whitelisted
       uint8 public numAddressesWhitelisted;
 
+      // Setting the Max number of whitelisted addresses
+      // User will put the value at the time of deployment
       constructor(uint8 _maxWhitelistedAddresses) {
           maxWhitelistedAddresses =  _maxWhitelistedAddresses;
       }
@@ -113,6 +115,8 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
 
     // here we deploy the contract
     const deployedWhitelistContract = await whitelistContract.deploy(10);
+    // 10 is the Maximum number of whitelisted addresses allowed
+    
     // Wait for it to finish deploying
     await deployedWhitelistContract.deployed();
 
