@@ -31,11 +31,12 @@ Hardhat is an Ethereum development environment and framework designed for full s
 
 
  - First, you need to create a Whitelist-Daap folder where the Hardhat project and your Next.js app will later go
+ - Open up a terminal and execute these commands
   ```bash
   mkdir Whitelist-Dapp
   cd Whitelist-Dapp
   ```
- - Then, in Whitelist-Daap folder, you will set up Hardhat project, Open up a terminal and execute these commands
+ - Then, in Whitelist-Daap folder, you will set up Hardhat project 
   ```bash
   mkdir hardhat-tutorial
   cd hardhat-tutorial
