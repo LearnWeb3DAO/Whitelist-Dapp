@@ -34,6 +34,7 @@ Hardhat is an Ethereum development environment and framework designed for full s
   ```bash
   mkdir Whitelist-Dapp
   cd Whitelist-Dapp
+  
   mkdir hardhat-tutorial
   cd hardhat-tutorial
   npm init --yes
