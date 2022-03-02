@@ -20,7 +20,10 @@ Lets start building 🚀
 - Your computer has Node.js installed. If not download from [here](https://nodejs.org/en/download/)
 
 ---
-
+## Prefer a Video?
+If you would rather learn from a video, we have a recording available of this tutorial on our YouTube. Watch the video by clicking on the screenshot below, or go ahead and read the tutorial!
+[![Whitelist dApp Part-1](https://i.imgur.com/QsVxGLq.png)](https://www.youtube.com/watch?v=eSS0vZ7rqpU&t=4757s "Whitelist dApp Tutorial")
+[![Whitelist dApp Part-2](https://i.imgur.com/084i0Sp.png)](https://www.youtube.com/watch?v=aqxAWLi6UMA "Whitelist dApp Tutorial")
 ## Build
 
 ### Smart Contract
