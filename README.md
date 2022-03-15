@@ -299,7 +299,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
   }
   ```
 
-- Open your index.js file under the pages folder and paste the following code, explanation of the code can be found in the comments. Make sure you read about React and [React Hooks](https://reactjs.org/docs/hooks-overview.html) if you are not familiar with them.
+- Open your index.js file under the pages folder and paste the following code, explanation of the code can be found in the comments. Make sure you read about React and [React Hooks](https://reactjs.org/docs/hooks-overview.html), [React Hooks Tutorial](https://www.w3schools.com/react/react_hooks.asp) if you are not familiar with them.
 
   ```js
   import Head from "next/head";
