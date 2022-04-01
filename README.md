@@ -16,8 +16,8 @@ Lets start building 🚀
 ## Prerequisites
 
 - You can write code in JavaScript (Beginner Track - [Level-0](https://github.com/LearnWeb3DAO/Basic-Programming))
-- Have set up a Metamask Wallet (Beginner Track - [Level-4](https://github.com/LearnWeb3DAO/Crypto-Wallets))
-- Your computer has Node.js installed. If not download from [here](https://nodejs.org/en/download/)
+- Have set up a MetaMask Wallet (Beginner Track - [Level-4](https://github.com/LearnWeb3DAO/Crypto-Wallets))
+- Your computer has Node.js installed. If not, download from [here](https://nodejs.org/en/download/)
 
 ---
 ## Prefer a Video?
@@ -29,17 +29,17 @@ If you would rather learn from a video, we have a recording available of this tu
 ### Smart Contract
 
 To build the smart contract we will be using [Hardhat](https://hardhat.org/).
-Hardhat is an Ethereum development environment and framework designed for full stack development in Solidity. In simple words you can write your smart contract, deploy them, run tests, and debug your code.
+Hardhat is an Ethereum development environment and framework designed for full stack development in Solidity. In simple words, you can write your smart contract, deploy them, run tests, and debug your code.
 
 
 
- - First, you need to create a Whitelist-Daap folder where the Hardhat project and your Next.js app will later go
+ - First, you need to create a Whitelist-Dapp folder where the Hardhat project and your Next.js app will later go
  - Open up a terminal and execute these commands
   ```bash
   mkdir Whitelist-Dapp
   cd Whitelist-Dapp
   ```
- - Then, in Whitelist-Daap folder, you will set up Hardhat project 
+ - Then, in Whitelist-Dapp folder, you will set up a Hardhat project 
   ```bash
   mkdir hardhat-tutorial
   cd hardhat-tutorial
@@ -58,7 +58,7 @@ Hardhat is an Ethereum development environment and framework designed for full s
   - Press enter for the question on if you want to add a `.gitignore`
   - Press enter for `Do you want to install this sample project's dependencies with npm (@nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers)?`
 
-Now you have a hardhat project ready to go!
+Now you have a Hardhat project ready to go!
 
 If you are not on mac, please do this extra step and install these libraries as well :)
 
@@ -79,7 +79,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
       uint8 public maxWhitelistedAddresses;
 
       // Create a mapping of whitelistedAddresses
-      // if an address is whitelisted, we would set it to true, it is false by default for all other addresses.
+      // if an address is whitelisted, we would set it to true, as it is false by default for all other addresses.
       mapping(address => bool) public whitelistedAddresses;
 
       // numAddressesWhitelisted would be used to keep track of how many addresses have been whitelisted
@@ -99,7 +99,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
       function addAddressToWhitelist() public {
           // check if the user has already been whitelisted
           require(!whitelistedAddresses[msg.sender], "Sender has already been whitelisted");
-          // check if the numAddressesWhitelisted < maxWhitelistedAddresses, if not then throw an error.
+          // check if the numAddressesWhitelisted < maxWhitelistedAddresses, if not then throw an error
           require(numAddressesWhitelisted < maxWhitelistedAddresses, "More addresses cant be added, limit reached");
           // Add the address which called the function to the whitelistedAddress array
           whitelistedAddresses[msg.sender] = true;
@@ -110,7 +110,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
   }
   ```
 
-- Lets deploy the contract to `rinkeby` network.Create a new file named `deploy.js` under the `scripts` folder
+- Let's deploy the contract to `rinkeby` network. Create a new file named `deploy.js` under the `scripts` folder
 
 - Now we will write some code to deploy the contract in `deploy.js` file.
 
@@ -124,21 +124,21 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
     */
     const whitelistContract = await ethers.getContractFactory("Whitelist");
 
-    // here we deploy the contract
+    // Here we deploy the contract
     const deployedWhitelistContract = await whitelistContract.deploy(10);
-    // 10 is the Maximum number of whitelisted addresses allowed
+    // 10 is the maximum number of whitelisted addresses allowed
     
     // Wait for it to finish deploying
     await deployedWhitelistContract.deployed();
 
-    // print the address of the deployed contract
+    // Print the address of the deployed contract
     console.log(
       "Whitelist Contract Address:",
       deployedWhitelistContract.address
     );
   }
 
-  // Call the main function and catch if there is any error
+  // Call the main function and catch if there are any errors
   main()
     .then(() => process.exit(0))
     .catch((error) => {
@@ -147,7 +147,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
     });
   ```
 
-- Now create a `.env` file in the `hardhat-tutorial` folder and add the following lines, use the instructions in the comments to get your Alchemy API Key URL and RINKEBY Private Key. Make sure that the account from which you get your rinkeby private key is funded with Rinkeby Ether.
+- Now create a `.env` file in the `hardhat-tutorial` folder and add the following lines of code. Use the instructions in the comments to get your Alchemy API Key URL and RINKEBY Private Key. Make sure that the account from which you get your rinkeby private key is funded with Rinkeby Ether.
 
   ```
 
@@ -156,7 +156,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
   ALCHEMY_API_KEY_URL="add-the-alchemy-key-url-here"
 
   // Replace this private key with your RINKEBY account private key
-  // To export your private key from Metamask, open Metamask and
+  // To export your private key from MetaMask, open MetaMask and
   // go to Account Details > Export Private Key
   // Be aware of NEVER putting real Ether into testing accounts
   RINKEBY_PRIVATE_KEY="add-the-rinkeby-private-key-here"
@@ -167,7 +167,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
   ```bash
   npm install dotenv
   ```
-- Now open the hardhat.config.js file, we would add the `rinkeby` network here so that we can deploy our contract to rinkeby. Replace all the lines in the `hardhar.config.js` file with the given below lines
+- Now inside the hardhat.config.js file, we add the `rinkeby` network here so that we can deploy our contract to rinkeby. Replace all the lines in the `hardhar.config.js` file with the given below lines
 
   ```js
   require("@nomiclabs/hardhat-waffle");
@@ -188,7 +188,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
   };
   ```
 
-- Compile the contract, open up a terminal pointing at`hardhat-tutorial` directory and execute this command
+- Compile the contract by opening up a terminal pointing at`hardhat-tutorial` directory and executing this command
 
   ```bash
      npx hardhat compile
@@ -228,7 +228,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
 
 - Now go to `http://localhost:3000`, your app should be running 🤘
 
-- Now lets install [Web3Modal library](https://github.com/Web3Modal/web3modal). Web3Modal is an easy to use library to help developers easily allow their users to connect to your dApps with all sorts of different wallets. By default Web3Modal Library supports injected providers like (Metamask, Dapper, Gnosis Safe, Frame, Web3 Browsers, etc) and WalletConnect, You can also easily configure the library to support Portis, Fortmatic, Squarelink, Torus, Authereum, D'CENT Wallet and Arkane.
+- Now let's install [Web3Modal library](https://github.com/Web3Modal/web3modal). Web3Modal is an easy to use library to help developers easily allow their users to connect to your dapps with all sorts of different wallets. By default Web3Modal Library supports injected providers like MetaMask, Dapper, Gnosis Safe, Frame, Web3 Browsers, etc and WalletConnect. You can also easily configure the library to support Portis, Fortmatic, Squarelink, Torus, Authereum, D'CENT Wallet and Arkane.
   Open up a terminal pointing at`my-app` directory and execute this command
 
   ```bash
@@ -300,7 +300,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
   }
   ```
 
-- Open your index.js file under the pages folder and paste the following code, explanation of the code can be found in the comments. Make sure you read about React and [React Hooks](https://reactjs.org/docs/hooks-overview.html), [React Hooks Tutorial](https://www.w3schools.com/react/react_hooks.asp) if you are not familiar with them.
+- Open your index.js file under the pages folder and paste the following code (explanation of the code can be found in the comments). Make sure you read about React and [React Hooks](https://reactjs.org/docs/hooks-overview.html). Check out [React Hooks Tutorial](https://www.w3schools.com/react/react_hooks.asp) if you are not familiar with them.
 
   ```js
   import Head from "next/head";
@@ -311,31 +311,31 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
   import { WHITELIST_CONTRACT_ADDRESS, abi } from "../constants";
 
   export default function Home() {
-    // walletConnected keep track of whether the user's wallet is connected or not
+    // walletConnected keeps track of whether the user's wallet is connected or not
     const [walletConnected, setWalletConnected] = useState(false);
-    // joinedWhitelist keeps track of whether the current metamask address has joined the Whitelist or not
+    // joinedWhitelist keeps track of whether the current MetaMask address has joined the Whitelist or not
     const [joinedWhitelist, setJoinedWhitelist] = useState(false);
     // loading is set to true when we are waiting for a transaction to get mined
     const [loading, setLoading] = useState(false);
-    // numberOfWhitelisted tracks the number of addresses's whitelisted
+    // numberOfWhitelisted tracks the number of addressess whitelisted
     const [numberOfWhitelisted, setNumberOfWhitelisted] = useState(0);
-    // Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
+    // Create a reference to the Web3 Modal (used for connecting to MetaMask) which persists as long as the page is open
     const web3ModalRef = useRef();
 
     /**
      * Returns a Provider or Signer object representing the Ethereum RPC with or without the
-     * signing capabilities of metamask attached
+     * signing capabilities of MetaMask attached
      *
      * A `Provider` is needed to interact with the blockchain - reading transactions, reading balances, reading state, etc.
      *
      * A `Signer` is a special type of Provider used in case a `write` transaction needs to be made to the blockchain, which involves the connected account
-     * needing to make a digital signature to authorize the transaction being sent. Metamask exposes a Signer API to allow your website to
+     * needing to make a digital signature to authorize the transaction being sent. MetaMask exposes a Signer API to allow your website to
      * request signatures from the user using Signer functions.
      *
      * @param {*} needSigner - True if you need the signer, default false otherwise
      */
     const getProviderOrSigner = async (needSigner = false) => {
-      // Connect to Metamask
+      // Connect to MetaMask
       // Since we store `web3Modal` as a reference, we need to access the `current` value to get access to the underlying object
       const provider = await web3ModalRef.current.connect();
       const web3Provider = new providers.Web3Provider(provider);
@@ -410,16 +410,16 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
      */
     const checkIfAddressInWhitelist = async () => {
       try {
-        // We will need the signer later to get the user's address
+        // We will need the Signer later to get the user's address
         // Even though it is a read transaction, since Signers are just special kinds of Providers,
-        // We can use it in it's place
+        // We can use it in its place
         const signer = await getProviderOrSigner(true);
         const whitelistContract = new Contract(
           WHITELIST_CONTRACT_ADDRESS,
           abi,
           signer
         );
-        // Get the address associated to the signer which is connected to  MetaMask
+        // Get the address associated to the Signer which is connected to  MetaMask
         const address = await signer.getAddress();
         // call the whitelistedAddresses from the contract
         const _joinedWhitelist = await whitelistContract.whitelistedAddresses(
@@ -436,7 +436,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
     */
     const connectWallet = async () => {
       try {
-        // Get the provider from web3Modal, which in our case is MetaMask
+        // Get the Provider from web3Modal, which in our case is MetaMask
         // When used for the first time, it prompts the user to connect their wallet
         await getProviderOrSigner();
         setWalletConnected(true);
@@ -477,13 +477,13 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
       }
     };
 
-    // useEffects are used to react to changes in state of the website
+    // useEffects are used to react to changes in website state
     // The array at the end of function call represents what state changes will trigger this effect
     // In this case, whenever the value of `walletConnected` changes - this effect will be called
     useEffect(() => {
-      // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
+      // If wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
       if (!walletConnected) {
-        // Assign the Web3Modal class to the reference object by setting it's `current` value
+        // Assign the Web3Modal class to the reference object by setting its `current` value
         // The `current` value is persisted throughout as long as this page is open
         web3ModalRef.current = new Web3Modal({
           network: "rinkeby",
@@ -543,7 +543,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
 
 Your whitelist dapp should now work without errors 🚀
 
-### Push to github
+### Push to GitHub
 
 Make sure before proceeding you have [pushed all your code to github](https://medium.com/hackernoon/a-gentle-introduction-to-git-and-github-the-eli5-way-43f0aa64f2e4) :)
 
@@ -553,8 +553,8 @@ Make sure before proceeding you have [pushed all your code to github](https://me
 
 We will now deploy your dApp, so that everyone can see your website and you can share it with all of your LearnWeb3 DAO friends.
 
-- Go to [Vercel](https://vercel.com/) and sign in with your GitHub
-- Then click on `New Project` button and then select your Whitelist dApp repo
+- Go to [Vercel](https://vercel.com/) and sign in with your GitHub account
+- Then click on `New Project` button and select your Whitelist dApp repo
 - ![](https://i.imgur.com/ZRjfkCE.png)
 - When configuring your new project, Vercel will allow you to customize your `Root Directory`
 - Click `Edit` next to `Root Directory` and set it to `my-app`
