@@ -83,6 +83,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
       mapping(address => bool) public whitelistedAddresses;
 
       // numAddressesWhitelisted would be used to keep track of how many addresses have been whitelisted
+      // NOTE: Don't change this variable name, as it will be part of verification
       uint8 public numAddressesWhitelisted;
 
       // Setting the Max number of whitelisted addresses
@@ -562,3 +563,7 @@ We will now deploy your dApp, so that everyone can see your website and you can 
 - Now you can see your deployed website by going to your dashboard, selecting your project, and copying the URL from there!
 
 Share your website in Discord :D
+
+## Verification
+
+To verify this level, make sure you have whitelisted some addresses in your contract. Input your contract address into the Smart Contract Verification box, and select the test network you deployed on.
