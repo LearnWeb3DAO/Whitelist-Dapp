@@ -229,7 +229,9 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
 - Now go to `http://localhost:3000`, your app should be running 🤘
 
 - Now lets install [Web3Modal library](https://github.com/Web3Modal/web3modal). Web3Modal is an easy to use library to help developers easily allow their users to connect to your dApps with all sorts of different wallets. By default Web3Modal Library supports injected providers like (Metamask, Dapper, Gnosis Safe, Frame, Web3 Browsers, etc) and WalletConnect, You can also easily configure the library to support Portis, Fortmatic, Squarelink, Torus, Authereum, D'CENT Wallet and Arkane.
-  Open up a terminal pointing at`my-app` directory and execute this command
+(Here's a live example on [Codesandbox.io](https://codesandbox.io/s/j43b10))
+
+- Open up a terminal pointing at`my-app` directory and execute this command
 
   ```bash
   npm install web3modal
