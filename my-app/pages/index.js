@@ -33,6 +33,14 @@ export default function Home() {
     // Connect to Metamask
     // Since we store `web3Modal` as a reference, we need to access the `current` value to get access to the underlying object
     const provider = await web3ModalRef.current.connect();
+    // Subscribe to accounts change
+    provider.on("accountsChanged", (accounts) => {
+      setWalletConnected(false);
+    });
+    // Subscribe to chainId change
+    provider.on("chainChanged", (chainId) => {
+      setWalletConnected(false);
+    });
     const web3Provider = new providers.Web3Provider(provider);
 
     // If user is not connected to the Rinkeby network, let them know and throw an error
