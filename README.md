@@ -53,19 +53,20 @@ Hardhat is an Ethereum development environment and framework designed for full s
   npx hardhat
   ```
 
-  - Select `Create a basic sample project`
+  - Select `Create a JavaScript project`
   - Press enter for the already specified `Hardhat Project root`
   - Press enter for the question on if you want to add a `.gitignore`
-  - Press enter for `Do you want to install this sample project's dependencies with npm (@nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers)?`
+  - Press enter for `Do you want to install this sample project's dependencies with npm (@nomicfoundation/hardhat-toolbox)?`
 
 Now you have a hardhat project ready to go!
 
 If you are not on mac, please do this extra step and install these libraries as well :)
 
 ```bash
-npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers
+npm install --save-dev @nomicfoundation/hardhat-toolbox
 ```
 
+- Before creating a new contract, let's delete the contract `Lock.sol` inside `contracts` directory.
 - Start by creating a new file inside the `contracts` directory called `Whitelist.sol`.
 
   ```go
@@ -170,7 +171,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
 - Now open the hardhat.config.js file, we would add the `rinkeby` network here so that we can deploy our contract to rinkeby. Replace all the lines in the `hardhar.config.js` file with the given below lines
 
   ```js
-  require("@nomiclabs/hardhat-waffle");
+  require("@nomicfoundation/hardhat-toolbox");
   require("dotenv").config({ path: ".env" });
 
   const ALCHEMY_API_KEY_URL = process.env.ALCHEMY_API_KEY_URL;
@@ -178,7 +179,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
   const RINKEBY_PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY;
 
   module.exports = {
-    solidity: "0.8.4",
+    solidity: "0.8.9",
     networks: {
       rinkeby: {
         url: ALCHEMY_API_KEY_URL,
