@@ -533,8 +533,8 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
 - Replace `"YOUR_ABI"` with the ABI of your Whitelist Contract. To get the ABI for your contract, go to your `hardhat-tutorial/artifacts/contracts/Whitelist.sol` folder and from your `Whitelist.json` file get the array marked under the `"abi"` key (it will be. a huge array, close to 100 lines if not more).
 
   ```js
-  export const abi = YOUR_ABI;
   export const WHITELIST_CONTRACT_ADDRESS = "YOUR_WHITELIST_CONTRACT_ADDRESS";
+  export const abi = YOUR_ABI;
   ```
 
 - Now in your terminal which is pointing to `my-app` folder, execute
