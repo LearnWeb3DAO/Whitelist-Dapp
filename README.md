@@ -203,13 +203,7 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
 ### Website
 
 - To develop the website we will use [React](https://reactjs.org/) and [Next Js](https://nextjs.org/). React is a javascript framework used to make websites and Next.js is a React framework that also allows writing backend APIs code along with the frontend, so you don't need two separate frontend and backend services.
-- First, You will need to create a new `next` app. Your folder structure should look something like
-
-  ```
-  - Whitelist-Dapp
-      - hardhat-tutorial
-      - my-app
-  ```
+- First, You will need to create a new `next` app.
 
 - To create this `next-app`, in the terminal point to Whitelist-Dapp folder and type
 
@@ -218,6 +212,14 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
   ```
 
   and press `enter` for all the questions
+
+- Your folder structure should look something like
+
+  ```
+  - Whitelist-Dapp
+      - hardhat-tutorial
+      - my-app
+  ```
 
 - Now to run the app, execute these commands in the terminal
 
