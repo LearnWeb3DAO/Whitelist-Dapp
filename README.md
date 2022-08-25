@@ -529,13 +529,15 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
 
 - Now create a new folder under the my-app folder and name it `constants`.
 - In the constants folder create a file, `index.js` and paste the following code.
-- Replace `"YOUR_WHITELIST_CONTRACT_ADDRESS"` with the address of the whitelist contract that you deployed.
-- Replace `"YOUR_ABI"` with the ABI of your Whitelist Contract. To get the ABI for your contract, go to your `hardhat-tutorial/artifacts/contracts/Whitelist.sol` folder and from your `Whitelist.json` file get the array marked under the `"abi"` key (it will be. a huge array, close to 100 lines if not more).
 
   ```js
   export const abi = YOUR_ABI;
   export const WHITELIST_CONTRACT_ADDRESS = "YOUR_WHITELIST_CONTRACT_ADDRESS";
   ```
+  
+- Replace `"YOUR_WHITELIST_CONTRACT_ADDRESS"` with the address of the whitelist contract that you deployed.
+- Replace `"YOUR_ABI"` with the ABI of your Whitelist Contract. To get the ABI for your contract, go to your `hardhat-tutorial/artifacts/contracts/Whitelist.sol` folder and from your `Whitelist.json` file get the array marked under the `"abi"` key (it will be. a huge array, close to 100 lines if not more).
+
 
 - Now in your terminal which is pointing to `my-app` folder, execute
 
