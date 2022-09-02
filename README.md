@@ -110,7 +110,7 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
   }
   ```
 
-- Lets deploy the contract to `rinkeby` network. Create a new file, or replace the default file named `deploy.js` under the `scripts` folder
+- Lets deploy the contract to `Goerli` network. Create a new file, or replace the default file named `deploy.js` under the `scripts` folder
 
 - Now we will write some code to deploy the contract in `deploy.js` file.
 
@@ -147,19 +147,20 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
     });
   ```
 
-- Now create a `.env` file in the `hardhat-tutorial` folder and add the following lines, use the instructions in the comments to get your Alchemy API Key URL and RINKEBY Private Key. Make sure that the account from which you get your rinkeby private key is funded with Rinkeby Ether.
+- Now create a `.env` file in the `hardhat-tutorial` folder and add the following lines, use the instructions in the comments to get your Quicknode API Key URL and Goerli Private Key. Make sure that the account from which you get your Goerli private key is funded with Goerli Ether.
+
+* Go to Quicknode using this [link](https://www.quicknode.com/?utm_source=learnweb3&utm_campaign=generic&utm_content=sign-up&utm_medium=learnweb3), and create an account. 
 
   ```
+  // create a quicknode account using the previous link
+  // create a new endpoint in the dashboard and select the network as Goerli, and replace "add-the-quicknode-key-url-here" with its http key url
+  QUICKNODE_API_KEY_URL="add-the-quicknode-key-url-here"
 
-  // Go to https://www.alchemyapi.io, sign up, create
-  // a new App in its dashboard and select the network as Rinkeby, and replace "add-the-alchemy-key-url-here" with its key url
-  ALCHEMY_API_KEY_URL="add-the-alchemy-key-url-here"
-
-  // Replace this private key with your RINKEBY account private key
+  // Replace this private key with your Goerli account private key
   // To export your private key from Metamask, open Metamask and
   // go to Account Details > Export Private Key
   // Be aware of NEVER putting real Ether into testing accounts
-  RINKEBY_PRIVATE_KEY="add-the-rinkeby-private-key-here"
+  Goerli_PRIVATE_KEY="add-the-Goerli-private-key-here"
 
   ```
 
@@ -167,22 +168,22 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
   ```bash
   npm install dotenv
   ```
-- Now open the hardhat.config.js file, we would add the `rinkeby` network here so that we can deploy our contract to rinkeby. Replace all the lines in the `hardhar.config.js` file with the given below lines
+- Now open the hardhat.config.js file, we would add the `Goerli` network here so that we can deploy our contract to Goerli. Replace all the lines in the `hardhar.config.js` file with the given below lines
 
   ```js
   require("@nomicfoundation/hardhat-toolbox");
   require("dotenv").config({ path: ".env" });
 
-  const ALCHEMY_API_KEY_URL = process.env.ALCHEMY_API_KEY_URL;
+  const QUICKNODE_API_KEY_URL = process.env.QUICKNODE_API_KEY_URL;
 
-  const RINKEBY_PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY;
+  const Goerli_PRIVATE_KEY = process.env.Goerli_PRIVATE_KEY;
 
   module.exports = {
     solidity: "0.8.9",
     networks: {
-      rinkeby: {
-        url: ALCHEMY_API_KEY_URL,
-        accounts: [RINKEBY_PRIVATE_KEY],
+      Goerli: {
+        url: QUICKNODE_API_KEY_URL,
+        accounts: [Goerli_PRIVATE_KEY],
       },
     },
   };
@@ -196,7 +197,7 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
   
 - To deploy, open up a terminal pointing at`hardhat-tutorial` directory and execute this command
   ```bash
-  npx hardhat run scripts/deploy.js --network rinkeby
+  npx hardhat run scripts/deploy.js --network Goerli
   ```
 - Save the Whitelist Contract Address that was printed on your terminal in your notepad, you would need it futher down in the tutorial.
 
@@ -344,11 +345,11 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
       const provider = await web3ModalRef.current.connect();
       const web3Provider = new providers.Web3Provider(provider);
 
-      // If user is not connected to the Rinkeby network, let them know and throw an error
+      // If user is not connected to the Goerli network, let them know and throw an error
       const { chainId } = await web3Provider.getNetwork();
       if (chainId !== 4) {
-        window.alert("Change the network to Rinkeby");
-        throw new Error("Change network to Rinkeby");
+        window.alert("Change the network to Goerli");
+        throw new Error("Change network to Goerli");
       }
 
       if (needSigner) {
@@ -490,7 +491,7 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
         // Assign the Web3Modal class to the reference object by setting it's `current` value
         // The `current` value is persisted throughout as long as this page is open
         web3ModalRef.current = new Web3Modal({
-          network: "rinkeby",
+          network: "Goerli",
           providerOptions: {},
           disableInjectedProvider: false,
         });
