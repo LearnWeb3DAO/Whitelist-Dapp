@@ -167,7 +167,7 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
   ```bash
   npm install dotenv
   ```
-- Now open the hardhat.config.js file, we would add the `rinkeby` network here so that we can deploy our contract to rinkeby. Replace all the lines in the `hardhar.config.js` file with the given below lines
+- Now open the hardhat.config.js file, we would add the `rinkeby` network here so that we can deploy our contract to rinkeby. Replace all the lines in the `hardhat.config.js` file with the given below lines
 
   ```js
   require("@nomicfoundation/hardhat-toolbox");
