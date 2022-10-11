@@ -180,7 +180,7 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
   module.exports = {
     solidity: "0.8.9",
     networks: {
-      rinkeby: {
+      Goerli: {
         url: ALCHEMY_API_KEY_URL,
         accounts: [GOERLI_PRIVATE_KEY],
       },
