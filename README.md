@@ -110,7 +110,7 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
   }
   ```
 
-- Lets deploy the contract to `rinkeby` network. Create a new file, or replace the default file named `deploy.js` under the `scripts` folder
+- Lets deploy the contract to `Goerli` network. Create a new file, or replace the default file named `deploy.js` under the `scripts` folder
 
 - Now we will write some code to deploy the contract in `deploy.js` file.
 
@@ -155,11 +155,11 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
   // a new App in its dashboard and select the network as Rinkeby, and replace "add-the-alchemy-key-url-here" with its key url
   ALCHEMY_API_KEY_URL="add-the-alchemy-key-url-here"
 
-  // Replace this private key with your RINKEBY account private key
+  // Replace this private key with your GOERLI account private key
   // To export your private key from Metamask, open Metamask and
   // go to Account Details > Export Private Key
   // Be aware of NEVER putting real Ether into testing accounts
-  RINKEBY_PRIVATE_KEY="add-the-rinkeby-private-key-here"
+  GOERLI_PRIVATE_KEY="add-the-rinkeby-private-key-here"
 
   ```
 
@@ -167,7 +167,7 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
   ```bash
   npm install dotenv
   ```
-- Now open the hardhat.config.js file, we would add the `rinkeby` network here so that we can deploy our contract to rinkeby. Replace all the lines in the `hardhar.config.js` file with the given below lines
+- Now open the hardhat.config.js file, we would add the `Goerli` network here so that we can deploy our contract to rinkeby. Replace all the lines in the `hardhar.config.js` file with the given below lines
 
   ```js
   require("@nomicfoundation/hardhat-toolbox");
@@ -175,14 +175,14 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
 
   const ALCHEMY_API_KEY_URL = process.env.ALCHEMY_API_KEY_URL;
 
-  const RINKEBY_PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY;
+  const GOERLI_PRIVATE_KEY = process.env.GOERLI_PRIVATE_KEY;
 
   module.exports = {
     solidity: "0.8.9",
     networks: {
       rinkeby: {
         url: ALCHEMY_API_KEY_URL,
-        accounts: [RINKEBY_PRIVATE_KEY],
+        accounts: [GOERLI_PRIVATE_KEY],
       },
     },
   };
@@ -196,7 +196,7 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
   
 - To deploy, open up a terminal pointing at`hardhat-tutorial` directory and execute this command
   ```bash
-  npx hardhat run scripts/deploy.js --network rinkeby
+  npx hardhat run scripts/deploy.js --network goerli
   ```
 - Save the Whitelist Contract Address that was printed on your terminal in your notepad, you would need it futher down in the tutorial.
 
