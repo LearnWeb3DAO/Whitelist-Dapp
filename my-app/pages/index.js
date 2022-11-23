@@ -73,7 +73,7 @@ export default function Home() {
       await getNumberOfWhitelisted();
       setJoinedWhitelist(true);
     } catch (err) {
-      console.error(err);
+      console.error(window.alert("You have already joined the whitelist"));
     }
   };
 
@@ -93,7 +93,8 @@ export default function Home() {
         provider
       );
       // call the numAddressesWhitelisted from the contract
-      const _numberOfWhitelisted = await whitelistContract.numAddressesWhitelisted();
+      const _numberOfWhitelisted =
+        await whitelistContract.numAddressesWhitelisted();
       setNumberOfWhitelisted(_numberOfWhitelisted);
     } catch (err) {
       console.error(err);
